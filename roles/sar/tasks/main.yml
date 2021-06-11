@@ -1,0 +1,18 @@
+---
+
+- name: Ensuring sysstat is present
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - sysstat
+- name: Copying sysstat cron job to server
+  template:
+    src: templates/sysstat.cron
+    dest: /etc/cron.d/sysstat
+    owner: root
+- name: Copying sysstat config to server
+  template:
+    src: templates/sysstat.default
+    dest: /etc/default/sysstat
+    owner: root

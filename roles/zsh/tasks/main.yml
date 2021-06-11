@@ -1,0 +1,7 @@
+---
+- name: "If absent, install {{ packages }}"
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - zsh

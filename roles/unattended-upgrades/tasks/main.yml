@@ -1,0 +1,33 @@
+---
+
+- name: "If absent, install {{ packages }}"
+  apt:
+    state: present
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - unattended-upgrades
+- name: Copying configuration to server
+  template:
+    backup: true
+    src: templates/60apt-banah
+    dest: /etc/apt/apt.conf.d/60apt-banah
+    owner: root
+    group: root
+    mode: '0644'
+- name: Copying configuration to server
+  template:
+    backup: true
+    src: templates/20ncp-upgrades
+    dest: /etc/apt/apt.conf.d/20ncp-upgrades
+    owner: root
+    group: root
+    mode: '0644'
+- name: Copying configuration to server
+  template:
+    backup: true
+    src: templates/50unattended-upgrades
+    dest: /etc/apt/apt.conf.d/50unattended-upgrades
+    owner: root
+    group: root
+    mode: '0644'

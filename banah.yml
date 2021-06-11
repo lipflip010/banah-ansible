@@ -1,0 +1,11 @@
+---
+- name: Setting up server.
+  hosts: "{{ server }}-server"
+  become: yes
+  become_user: root
+  vars_files:
+    - vars/credentials.yml
+  roles:
+    - mail
+    - sar
+    - unattended-upgrades

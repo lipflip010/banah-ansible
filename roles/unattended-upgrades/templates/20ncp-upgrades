@@ -1,0 +1,13 @@
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Unattended-Upgrade "1";
+APT::Periodic::MaxAge "14";
+APT::Periodic::AutocleanInterval "7";
+Unattended-Upgrade::Automatic-Reboot "true";
+Unattended-Upgrade::Automatic-Reboot-Time "04:00";
+Dpkg::Options {
+   "--force-confdef";
+   "--force-confold";
+};
+
+// Enable the update/upgrade script, disabled by Armbian in 02-armbian-periodic
+APT::Periodic::Enable "1";

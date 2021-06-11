@@ -1,0 +1,45 @@
+---
+- name: "If present, remove {{ packages }}"
+  apt:
+    state: absent
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - ssmtp
+      - mailutils
+- name: "If absent, install {{ packages }}"
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - msmtp
+      - msmtp-mta
+      - bsd-mailx
+- name: "Creating log file for msmtp"
+  file:
+    path: /var/log/msmtp.log
+    owner: msmtp
+    group: msmtp
+    state: touch
+    mode: '0644'
+- name: Copying msmtp configuration to server
+  template:
+    src: templates/.msmtprc
+    dest: /etc/msmtprc
+    owner: root
+    group: root
+    mode: '0600'
+- name: Copying msmtp configuration to server root home
+  template:
+    src: templates/.msmtprc
+    dest: /root/.msmtprc
+    owner: root
+    group: root
+    mode: '0600'
+- name: Setting sendmail to msmtp
+  template:
+    src: templates/.mailrc
+    dest: /root/.mailrc
+    owner: root
+    group: root
+    mode: '0644'

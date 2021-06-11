@@ -1,0 +1,20 @@
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Unattended-Upgrade "1";
+APT::Periodic::MaxAge "14";
+APT::Periodic::AutocleanInterval "7";
+
+Unattended-Upgrade::Mail "philipp.albers@posteo.de";
+Unattended-Upgrade::Sender "upgrades@palbers.de";
+Unattended-Upgrade::Remove-Unused-Dependencies "true";
+
+Unattended-Upgrade::Automatic-Reboot "true";
+Unattended-Upgrade::Automatic-Reboot-Time "06:00";
+
+Unattended-Upgrade::Origins-Pattern {
+        "origin=Raspbian,codename=${distro_codename},label=Raspbian";
+        "origin=Raspberry Pi Foundation,codename=${distro_codename},label=Raspberry Pi Foundation";
+};
+
+
+
+

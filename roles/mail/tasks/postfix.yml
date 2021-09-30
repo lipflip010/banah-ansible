@@ -1,0 +1,23 @@
+---
+#TODO: replace mstmp with postfix https://medium.com/@stacyprowell?p=6f7e3ad3d0e
+- name: "If present, remove {{ packages }}"
+  apt:
+    state: absent
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - msmtp
+      - msmtp-mta
+      - bsd-mailx
+- name: "If absent, install {{ packages }}"
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - postfix
+      - libsasl2-modules
+      - mailutils
+- name: "Delete deprecated mailrc config"
+  file:
+    state: absent
+    path: /root/.mailrc
